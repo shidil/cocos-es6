@@ -27,12 +27,11 @@ var questions = [
 var createCocosProject = function(params) {
   var exec = require('child_process').exec;
   var create = `cocos new -l js -p ${params.package} --no-native '${params.project}'`;
-  var moveFiles = `cp -Tr '${__dirname}/${params.project}' ${__dirname} && rm -rf ${params.project}`;
+  var moveFiles = `cp -Tr '${__dirname}/${params.project}' ${__dirname} && rm -rf '${params.project}'`;
 
   exec(create, function(error, stdout, stderr) {
-    exec(moveFiles, function(error, stdout, stderr) {
-      console.log(moveFiles);
-    });
+    // move generated project to package root.
+    exec(moveFiles, function(error, stdout, stderr) { /*noop*/ });
   });
 };
 
