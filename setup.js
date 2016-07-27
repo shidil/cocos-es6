@@ -17,6 +17,7 @@ let createCocosProject = function(params) {
     }
 
     // move generated project to package root.
+    console.log('-------- moving generated project to root --------');
     moveFiles(`${__dirname}/${params.project}`, __dirname);
   });
 };
@@ -44,6 +45,7 @@ let moveFiles = function(from, to) {
 
 let processInput = function(input) {
   // create cocos2d-x project with js as language
+  console.log('-------- creating cocos 2d project --------');
   let error = createCocosProject(input);
 };
 
@@ -66,5 +68,6 @@ let questions = [
   }
 ];
 
+console.log('-------- starting setup --------');
 inquirer.prompt(questions).then(processInput);
 
