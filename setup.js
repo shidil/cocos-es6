@@ -1,11 +1,53 @@
-/**
- * Input prompt example
- */
-
 'use strict';
-var inquirer = require('inquirer');
+let inquirer = require('inquirer');
+let exec = require('child_process').exec
 
-var questions = [
+/**
+ * Uses cocos console to create a cocos 2d js project
+ * @param  {object} params project properties collected from stdin
+ * @return {undefined}
+ */
+let createCocosProject = function(params) {
+  let create = `cocos new -l js -p ${params.package} --no-native '${params.project}'`;
+  exec(create, function(error, stdout, stderr) {
+    console.log(stdout);
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    // move generated project to package root.
+    moveFiles(`${__dirname}/${params.project}`, __dirname);
+  });
+};
+
+/**
+ * Utility for moving files
+ * @param  {string} from
+ * @param  {string} to
+ * @return {undefined}
+ */
+let moveFiles = function(from, to) {
+  // using cp, I tried with mv though but this just works.
+  let moveFiles = `cp -Tr '${from}' ${to} && rm -rf '${from}'`;
+  exec(moveFiles, function(error, stdout, stderr) {
+    console.log(stdout);
+    if (error) {
+      console.log(error);
+      return;
+    }
+
+    // remove .git folder and other unnecessory files for new project
+    // TODO
+  });
+};
+
+let processInput = function(input) {
+  // create cocos2d-x project with js as language
+  let error = createCocosProject(input);
+};
+
+let questions = [
   {
     type: 'input',
     name: 'package',
@@ -24,16 +66,5 @@ var questions = [
   }
 ];
 
-var createCocosProject = function(params) {
-  var exec = require('child_process').exec;
-  var create = `cocos new -l js -p ${params.package} --no-native '${params.project}'`;
-  var moveFiles = `cp -Tr '${__dirname}/${params.project}' ${__dirname} && rm -rf '${params.project}'`;
-
-  exec(create, function(error, stdout, stderr) {
-    // move generated project to package root.
-    exec(moveFiles, function(error, stdout, stderr) { /*noop*/ });
-  });
-};
-
-inquirer.prompt(questions).then(createCocosProject);
+inquirer.prompt(questions).then(processInput);
 
