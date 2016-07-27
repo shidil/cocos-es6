@@ -1,0 +1,18 @@
+{
+  "name": "cocos-es6",
+  "version": "0.0.1",
+  "description": "Quick start for cocos 2d with es6",
+  "main": "setup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cocos run -p web"
+  },
+  "keywords": [
+    "cocos2d"
+  ],
+  "author": "Shidil Eringa",
+  "license": "MIT",
+  "devDependencies": {
+    "inquirer": "^1.1.2"
+  }
+}
