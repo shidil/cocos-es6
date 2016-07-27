@@ -5,7 +5,8 @@
   "main": "setup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cocos run -p web"
+    "start": "cocos run -p web",
+    "setup": "node setup.js"
   },
   "keywords": [
     "cocos2d"
