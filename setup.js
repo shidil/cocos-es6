@@ -30,7 +30,7 @@ let createCocosProject = function(params) {
  */
 let moveFiles = function(from, to) {
   // using cp, I tried with mv though but this just works.
-  let moveFiles = `cp -Tr '${from}' ${to} && rm -rf '${from}'`;
+  let moveFiles = `cp -Trn '${from}' ${to} && rm -rf '${from}' | true`;
   exec(moveFiles, function(error, stdout, stderr) {
     console.log(stdout);
     if (error) {
@@ -46,7 +46,7 @@ let moveFiles = function(from, to) {
 let processInput = function(input) {
   // create cocos2d-x project with js as language
   console.log('-------- creating cocos 2d project --------');
-  let error = createCocosProject(input);
+  createCocosProject(input);
 };
 
 let questions = [
