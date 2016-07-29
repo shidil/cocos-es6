@@ -4,7 +4,7 @@ let path = require('path');
 module.exports =  {
   entry: [
     'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/only-dev-server',
+    'webpack/hot/dev-server',
     './src/index.js'
   ],
   output: {

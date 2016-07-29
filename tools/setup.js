@@ -8,7 +8,9 @@ let exec = require('child_process').exec
  * @return {undefined}
  */
 let createCocosProject = function(params) {
-  let create = `cocos new -l js -p ${params.package} --no-native '${params.project}'`;
+  let nativeOption = params.native ? '' : '--no-native';
+  let create = `cocos new -d tools -l js -p ${params.package} ${nativeOption} '${params.project}'`;
+
   exec(create, function(error, stdout, stderr) {
     console.log(stdout);
     if (error) {
@@ -18,7 +20,7 @@ let createCocosProject = function(params) {
 
     // move generated project to package root.
     console.log('-------- moving generated project to root --------');
-    moveFiles(`${__dirname}/${params.project}`, __dirname);
+    moveFiles(`${__dirname}/${params.project}`, __dirname + '/../');
   });
 };
 
@@ -56,6 +58,9 @@ let questions = [
     message: 'What\'s your package name',
     default: function () {
       return 'com.example.hello';
+    },
+    filter: function (val) {
+      return val.toLowerCase();
     }
   },
   {
@@ -64,6 +69,18 @@ let questions = [
     message: 'What\'s your project name',
     default: function () {
       return 'Hello World';
+    }
+  },
+  {
+    type: 'list',
+    name: 'native',
+    message: 'Do you need native builds?',
+    choices: ['yes', 'no'],
+    default: function () {
+      return 'no';
+    },
+    filter: function (val) {
+      return (val.toLowerCase() === 'yes') ? true : false;
     }
   }
 ];
