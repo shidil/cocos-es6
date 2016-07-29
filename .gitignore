@@ -1,8 +1,10 @@
 # node
 node_modules
 npm-debug.log
+CMakeLists.txt
 
 build
+frameworks
 
 # app
 bundle.js
