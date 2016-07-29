@@ -5,10 +5,13 @@
   "main": "setup.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cocos run -p web",
     "setup": "node tools/setup.js",
+    "start": "npm run dev",
     "dev": "webpack-dev-server --port 8080 --progress --colors --hot",
-    "production": "NODE_ENV=production node tools/production.js"
+    "prod:bundlesrc": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "prod:cocos": "cocos deploy -p web -m release",
+    "production": "npm run clean && npm run prod:bundlesrc && npm run prod:cocos && rm -f bundle.js",
+    "clean": "rm -rf publish && rm -f bundle.js"
   },
   "keywords": [
     "cocos2d",
