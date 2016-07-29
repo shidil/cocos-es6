@@ -6,11 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cocos run -p web",
-    "setup": "node setup.js",
-    "dev": "webpack-dev-server --port 8080 --progress --colors --hot"
+    "setup": "node tools/setup.js",
+    "dev": "webpack-dev-server --port 8080 --progress --colors --hot",
+    "production": "NODE_ENV=production node tools/production.js"
   },
   "keywords": [
-    "cocos2d"
+    "cocos2d",
+    "es6",
+    "es2015",
+    "babel",
+    "webpack",
+    "eslint",
+    "boilerplate",
+    "quickstart"
   ],
   "author": "Shidil Eringa",
   "license": "MIT",
