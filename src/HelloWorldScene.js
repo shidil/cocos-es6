@@ -1,4 +1,4 @@
-import CC from './CC';
+import {CC} from './globals';
 import Resources from './resource';
 
 const HelloWorldLayer = CC.Layer.extend({
