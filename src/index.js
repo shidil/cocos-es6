@@ -1,11 +1,10 @@
-import {CC, Document} from './globals';
-import Resources from './resource';
-import Config from './config';
-import HelloWorldScene from './HelloWorldScene';
+import {CC, Document} from './constants/globals';
+import Resources from './constants/resources';
+import Config from './constants/config';
+import HelloWorldScene from './scenes/HelloWorldScene';
 
 const gameResourcesToLoad = Resources.getResourceMeta();
 
-console.log('game started');
 // Experimental!! assuming cc.game.onStart has fired
 if (!CC.sys.isNative && Document.getElementById('cocosLoading')) {
   Document.body.removeChild(Document.getElementById('cocosLoading'));
@@ -32,3 +31,4 @@ CC.LoaderScene.preload(gameResourcesToLoad, function () {
 }, this);
 
 console.log('bootstrapped game');
+console.log('game started');

@@ -7,7 +7,7 @@ const Config = {
   enableRetina: CC.sys.os === CC.sys.OS_IOS ? true : false,
 
   width: 960,
-  height: 640
+  height: 540
 };
 
 export default Config;

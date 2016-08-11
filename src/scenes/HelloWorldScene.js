@@ -1,5 +1,5 @@
-import {CC} from './globals';
-import Resources from './resource';
+import {CC} from '../constants/globals';
+import Resources from '../constants/resources';
 
 const HelloWorldLayer = CC.Layer.extend({
   sprite: null,
