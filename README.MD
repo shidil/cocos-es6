@@ -1,7 +1,7 @@
 # Quick start for cocos2d-x with es6.
 
 ## Getting started
-1. **Clone repo** `https://github.com/Shidil/cocos-es6.git`
+1. **Clone repo** `git clone https://github.com/Shidil/cocos-es6.git`
 2. **Install packages** `npm install`
 3. **Run setup** `npm run setup`
 4. **Run development server** `npm start`
