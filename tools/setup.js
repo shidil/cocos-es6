@@ -1,17 +1,18 @@
 'use strict';
+let mv = require('mv');
 let inquirer = require('inquirer');
-let exec = require('child_process').exec
+let exec = require('child_process').exec;
 
 /**
  * Uses cocos console to create a cocos 2d js project
  * @param  {object} params project properties collected from stdin
  * @return {undefined}
  */
-let createCocosProject = function(params) {
-  let nativeOption = params.native ? '' : '--no-native';
-  let create = `cocos new -d tools -l js -p ${params.package} ${nativeOption} '${params.project}'`;
+let createCocosProject = function (params) {
+  let orientation = params.portrait ? '' : '--portrait';
+  let create = `cocos new -d tools -l js -p ${params.package} ${orientation} "${params.project}"`;
 
-  exec(create, function(error, stdout, stderr) {
+  exec(create, function (error, stdout) {
     console.log(stdout);
     if (error) {
       console.log(error);
@@ -26,26 +27,20 @@ let createCocosProject = function(params) {
 
 /**
  * Utility for moving files
- * @param  {string} from
- * @param  {string} to
+ * @param  {string} from source directory
+ * @param  {string} to destination directory
  * @return {undefined}
  */
-let moveFiles = function(from, to) {
-  // using cp, I tried with mv though but this just works.
-  let moveFiles = `cp -Trn '${from}' ${to} && rm -rf '${from}' | true`;
-  exec(moveFiles, function(error, stdout, stderr) {
-    console.log(stdout);
+let moveFiles = function (from, to) {
+  mv(from, to, {clobber: false}, function (error) {
     if (error) {
       console.log(error);
       return;
     }
-
-    // remove .git folder and other unnecessory files for new project
-    // TODO
   });
 };
 
-let processInput = function(input) {
+let processInput = function (input) {
   // create cocos2d-x project with js as language
   console.log('-------- creating cocos 2d project --------');
   createCocosProject(input);
@@ -73,8 +68,8 @@ let questions = [
   },
   {
     type: 'list',
-    name: 'native',
-    message: 'Do you need native builds?',
+    name: 'portrait',
+    message: 'Set the project to be on portrait mode?',
     choices: ['yes', 'no'],
     default: function () {
       return 'no';
