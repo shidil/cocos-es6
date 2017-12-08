@@ -1,9 +1,9 @@
 let path = require('path');
 
-let node_modules_dir = path.resolve(__dirname, 'node_modules');
-
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js'
+  },
   output: {
     path: path.resolve(__dirname, '../'),
     filename: 'bundle.js'
@@ -11,10 +11,16 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.(js)$/,
-        exclude: /node_modules/,
-        loaders: ['babel']
+        test: /\.js$/,
+        include: path.resolve(__dirname, '../src'),
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+            plugins: ['@babel/transform-runtime']
+          }
+        }
       }
     ]
   }
-}
+};
