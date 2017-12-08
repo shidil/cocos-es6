@@ -1,5 +1,6 @@
 'use strict';
 let mv = require('mv');
+let del = require('delete');
 let inquirer = require('inquirer');
 let exec = require('child_process').exec;
 
@@ -37,6 +38,9 @@ let moveFiles = function (from, to) {
       console.log(error);
       return;
     }
+
+    del.sync([`${__dirname}/../src/app.js`]);
+    del.sync([`${__dirname}/../src/resource.js`]);
   });
 };
 
